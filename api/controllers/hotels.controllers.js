@@ -212,3 +212,21 @@ module.exports.hotelsUpdateOne = function(req, res){
         }       
     });
 }
+
+module.exports.hotelsDeleteOne = function(req, res){
+    var id = req.params.hotelId;
+    Hotel
+        .findByIdAndRemove(id)
+        .exec(function(err, hotel){
+            if(err){
+                res
+                    .status(404)
+                    .json(err);
+            }else{
+                console.log("Hotel deleted, id:", id);
+                res
+                    .status(204)
+                    .json();
+            }
+        });
+}
